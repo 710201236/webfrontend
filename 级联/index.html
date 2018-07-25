@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://passport.baidu.com/js/sitedata_bas.js" charset="GBK"></script>  
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>省份城市</td>
+                <td>
+                    <select name="province" id="province">
+                        <option value="">请选择省份</option>
+                    </select>
+                    <select name="city" id="city">
+                        <option value="">请选择城市</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            //页面加载完毕后开始执行的事件
+            var city_json='{"江苏":["南京","常州"],"河南":["南阳","安阳"]}';
+            var city_obj=eval('('+city_json+')');
+            for (var key in city_obj)
+            {
+                $("#province").append("<option value='"+key+"'>"+key+"</option>");
+            }
+            $("#province").change(function(){
+                var now_province=$(this).val();
+                $("#city").html('<option value="">请选择城市</option>');
+                for(var k in city_obj[now_province])
+                {
+                    var now_city=city_obj[now_province][k];
+                    $("#city").append('<option value="'+now_city+'">'+now_city+'</option>');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
